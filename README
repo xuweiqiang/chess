@@ -1,0 +1,12 @@
+This is a chess game written entirely in C.
+
+When the game is run, the user selects a difficulty level which correlates to
+how far ahead the computer is allowed to calculate moves, and the chances it
+makes an optimal move. The board is drawn in a terminal and the player makes
+moves by entering them using standard chess notation like Nf3 or Bb5.
+
+INSTALLATION
+Once the source code is downloaded, the game may be compiled by running make.
+This will build the binary in the same directory as the source files and will
+be named 'chess'. From there the game may be started by simply running:
+$ ./chess
