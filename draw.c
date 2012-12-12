@@ -26,10 +26,10 @@ int pieces[8][8] = {
     {17, 18, 19, 20, 21, 22, 23, 24},
     {25, 26, 27, 28, 29, 30, 31, 32}
 };
-char keystr[34] = "-RNBQKBNRppppppppppppppppRNBQKBNR";
+char keystr[34] = "-RNBQKBNRooooooooooooooooRNBQKBNR";
 
 void white_text(char *text) {
-    /* actually returns yellow text */
+    /* actually makes text bold yellow */
     int i = strlen(text);
     char tmp[i];
     sprintf(tmp, "\033[1;33m%s\033[0m", text);
@@ -37,7 +37,7 @@ void white_text(char *text) {
 }
 
 void black_text(char *text) {
-    /* actually returns blue text */
+    /* actually makes text bold blue */
     int i = strlen(text);
     char tmp[i];
     sprintf(tmp, "\033[1;34m%s\033[0m", text);
@@ -61,7 +61,7 @@ void update_and_draw_board(int piece_id, char dest[3]) {
     printf("Mike Okner's CHESS\n");
     printf("      a        b        c        d        e        f        g        h\n");
     printf("  -------------------------------------------------------------------------\n");
-    for (row=0; row<8; row++) {
+    for (row=7; row>=0; row--) {
         printf("  |        |        |        |        |        |        |        |        |\n");
         printf("%d |", row + 1);
         for (i=0; i<8; i++) {
