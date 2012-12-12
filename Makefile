@@ -6,7 +6,7 @@ OBJECTS=$(SOURCES:.c=.o)
 EXECUTABLE=chess
 
 all:
-	gcc game.c chess.c -o chess
+	gcc -g draw.c game.c chess.c -o chess
 	
 $(EXECUTABLE): $(OBJECTS) 
 	$(CC) $(LDFLAGS) $(OBJECTS) -o $@

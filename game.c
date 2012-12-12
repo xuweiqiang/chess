@@ -5,10 +5,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "draw.h"
 
 int run_game(char *player_color, int difficulty) {
     /* Called by main() in chess.c to start the gameplay */
-    printf("run_game() function called.\n");
-    printf("The player will be %s and the difficulty setting is %d.\n", player_color, difficulty);
-    return 1;
+    update_and_draw_board(-1, "b3");
+    printf("\nUser color is %s and difficulty is %d\n", player_color, difficulty);
+    return 0;
 }
