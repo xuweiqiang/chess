@@ -1,0 +1,24 @@
+# Binary project files #
+*.o
+chess
+
+# OS Generated Files #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+
+# Scripts #
+# *.sh
+
+
+# Misc #
+*.bak
+*.swp
+*.swo
+ToDo.ini
