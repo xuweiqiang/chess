@@ -8,8 +8,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#include <curses.h>
-#include <term.h>
+/* #include <curses.h>
+#include <term.h> */
 #include "game.h"
 
 const char *version = "1.0.0";
@@ -22,9 +22,15 @@ const char *usage_string =
 char *colors() {
     /* User picks a number to determine who is black and white */
     int in, c, n;
+    char in_str[5];
     char *color;
     printf("Please enter a number between 1 and 10: ");
-    scanf("%d", &in);
+    fgets(in_str, 3, stdin);
+    sscanf(in_str, "%d\n", &in);
+    if (in > 10 || in < 1) {
+        printf("%d is an invalid selection.\n", in);
+        exit(1);
+    }
     c = in;
     srand(time(NULL));
     while (c == in)
@@ -63,12 +69,23 @@ int main(int argc, const char **argv) {
     }
     env_check();
     char *color;
+    char diff_str[5];
+    int difficulty, i;
     /* Show intro text and pick colors */
     printf("\033[2J\033[H");  /* ANSI Escape to clear terminal. */
-    printf("CHESS v%s\n", version);
+    printf("Mike Okner's CHESS v%s\n", version);
     printf("We will now select colors.\n");
     color = colors();
+    printf("Enter a difficulty setting between 1 and 5: ");
+    fgets(diff_str, 3, stdin);
+    sscanf(diff_str, "%d\n", &difficulty);
+    if (difficulty > 5 || difficulty < 1) {
+        printf("%d is an invalid selection.\n", difficulty);
+        exit(1);
+    }
     /* Move on to gameplay */
-    exit(run_game(color));
+    printf("Press ENTER to begin the game.");
+    getchar();
+    exit(run_game(color, difficulty));
     return 1;
 }
