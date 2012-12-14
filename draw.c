@@ -27,6 +27,10 @@ int pieces[8][8] = {
     {25, 26, 27, 28, 29, 30, 31, 32}
 };
 char keystr[34] = "-RNBQKBNRooooooooooooooooRNBQKBNR";
+struct xy {
+    int x;
+    int y;
+};
 
 void white_text(char *text) {
     /* actually makes text bold yellow */
@@ -44,6 +48,35 @@ void black_text(char *text) {
     strcpy(text, tmp);
 }
 
+struct xy get_curr_coords(int piece_id) {
+    struct xy coords;
+    int i, j;
+    for (i=0; i<8; i++) {
+        for (j=0; j<8; j++) {
+            if (pieces[i][j] == piece_id) {
+                coords.x = i;
+                coords.y = j;
+                return coords;
+            }
+        }
+    }
+}
+
+struct xy process_dest(char dest[3]) {
+    /* string is like "e3" which translates to coordintes. */
+    char ref[9] = "abcdefgh";
+    struct xy coords;
+    int i, y;
+    coords.x = dest[1] - '0' - 1;
+    for (i=0; i<9; i++) {
+        if (ref[i] == dest[0]) {
+            coords.y = i;
+            break;
+        }
+    }
+    return coords;
+}
+
 void update_and_draw_board(int piece_id, char dest[3]) {
     /* Draws the board on the screen.
      * Argument can be an move or empty for the initial run.
@@ -52,7 +85,12 @@ void update_and_draw_board(int piece_id, char dest[3]) {
     */
     if (piece_id != -1) {
         /* Update the coordinates */
-        printf("Not implemented.\n");
+        struct xy oldcoords;
+        struct xy newcoords;
+        oldcoords = get_curr_coords(piece_id);
+        pieces[oldcoords.x][oldcoords.y] = 0;
+        newcoords = process_dest(dest);
+        pieces[newcoords.x][newcoords.y] = piece_id;
     }
     /* Draw the board */
     int i, row, key;
@@ -67,7 +105,6 @@ void update_and_draw_board(int piece_id, char dest[3]) {
         for (i=0; i<8; i++) {
             key = pieces[row][i];
             snprintf(name, 2, "%c", keystr[key]);
-            // fprintf(stderr, "row: %d, col: %d, id: %d, piece: %s\n", row, i, key, name);
             if (key > 0 && key <= 16)
                 white_text(name);
             else if (key > 0 && key >= 17)
