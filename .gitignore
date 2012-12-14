@@ -1,6 +1,8 @@
-# Binary project files #
+# project files #
 *.o
 chess
+tmp*
+*tmp
 
 # OS Generated Files #
 .DS_Store
