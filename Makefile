@@ -1,12 +1,11 @@
 CC=gcc
-CFLAGS=
-LDFLAGS=
-SOURCES=chess.c draw.c calc_moves.c
+CFLAGS=-c -g
+LDFLAGS=-g
+SOURCES=chess.c draw.c game.c
 OBJECTS=$(SOURCES:.c=.o)
 EXECUTABLE=chess
 
-all:
-	$(SOURCES) $(EXECUTABLE)
+all: $(SOURCES) $(EXECUTABLE)
 	
 $(EXECUTABLE): $(OBJECTS) 
 	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
